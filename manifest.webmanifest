@@ -1,0 +1,10 @@
+{
+  "name": "宅建 一問一答",
+  "short_name": "宅建一問",
+  "description": "宅建業法の一問一答学習アプリ",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f1117",
+  "theme_color": "#0f1117",
+  "lang": "ja"
+}
