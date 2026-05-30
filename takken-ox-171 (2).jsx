@@ -111,7 +111,7 @@ const clearWrong=async()=>{
   await saveWrongIds([]);
 };
 
-const r={"--bg":"#0f1117","--card":"#1a1d27","--card2":"#232733","--text":"#e8e6e3","--text2":"#9a97a0","--accent":"#6c63ff","--accent2":"#ff6b6b","--green":"#2ecc71","--red":"#e74c3c","--track":"#2a2d3a","--border":"#2e3140",fontFamily:"'Noto Sans JP','Hiragino Sans','Meiryo',sans-serif",background:"var(--bg)",color:"var(--text)",minHeight:"100vh",padding:0,margin:0,boxSizing:"border-box"};
+const r={"--bg":"#f7f4ed","--card":"#fffdf8","--card2":"#f0eadf","--text":"#273142","--text2":"#667085","--accent":"#3f6f8f","--accent2":"#a86f3d","--green":"#4f9a66","--red":"#b85c5c","--track":"#e6ddd1","--border":"#ddd3c4",fontFamily:"'Noto Sans JP','Hiragino Sans','Meiryo',sans-serif",background:"var(--bg)",color:"var(--text)",minHeight:"100vh",padding:0,margin:0,boxSizing:"border-box",overflowX:"hidden",WebkitTapHighlightColor:"transparent"};
 
 // ===== MENU =====
 if(mode==="menu"){
@@ -130,7 +130,7 @@ const GROUPS=[
 {label:"Ch12 監督処分・罰則",cats:["bassoku","touroku","takenshi"]},
 {label:"Ch13 住宅瑕疵担保",cats:["kashi"]},
 ];
-return(<div style={r}><div style={{maxWidth:480,margin:"0 auto",padding:"16px 14px"}}>
+return(<div style={r}><div style={{width:"100%",maxWidth:560,margin:"0 auto",padding:"20px 16px 30px",overflowX:"hidden"}}> 
 {/* ヘッダー */}
 <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:14}}>
   <span style={{fontSize:22}}>📖</span>
@@ -145,18 +145,18 @@ return(<div style={r}><div style={{maxWidth:480,margin:"0 auto",padding:"16px 14
 
 
 {/* 出題数 ＋ スタート */}
-<div style={{background:"var(--card)",border:"1px solid var(--border)",borderRadius:14,padding:"12px 14px",marginBottom:14}}>
+<div style={{background:"var(--card)",border:"1px solid var(--border)",borderRadius:18,padding:"16px 16px",marginBottom:16,boxShadow:"0 2px 12px rgba(39,49,66,.05)"}}>
   <div style={{fontSize:11,color:"var(--text2)",fontWeight:600,marginBottom:8}}>出題数</div>
-  <div style={{display:"flex",gap:6,marginBottom:12,flexWrap:"wrap"}}>
-    {[5,10,15,20,30,50].map(n=>{const maxN=cat==="all"?Q.length:Q.filter(x=>x.cat===cat).length;return(<button key={n} onClick={()=>setQc(n)} style={{padding:"5px 10px",borderRadius:8,fontSize:12,fontWeight:700,cursor:"pointer",border:qc===n?"2px solid var(--accent2)":"1px solid var(--border)",background:qc===n?"rgba(255,107,107,.18)":"#12141e",color:qc===n?"var(--accent2)":"var(--text2)",opacity:n>maxN?.4:1}}>{n}</button>);})}
+  <div style={{display:"flex",gap:9,marginBottom:15,flexWrap:"wrap"}}> 
+    {[5,10,15,20,30,50].map(n=>{const maxN=cat==="all"?Q.length:Q.filter(x=>x.cat===cat).length;return(<button key={n} onClick={()=>setQc(n)} style={{minHeight:44,minWidth:52,padding:"10px 14px",borderRadius:14,fontSize:15,fontWeight:800,cursor:"pointer",border:qc===n?"2px solid var(--accent)":"1px solid var(--border)",background:qc===n?"#eaf4f8":"var(--card2)",color:qc===n?"var(--accent)":"var(--text2)",opacity:n>maxN?.4:1}}>{n}</button>);})}
   </div>
-  <button onClick={()=>start(false)} style={{width:"100%",padding:13,borderRadius:12,border:"none",background:"linear-gradient(135deg,#6c63ff,#8b7cff)",color:"#fff",fontSize:15,fontWeight:700,cursor:"pointer",boxShadow:"0 4px 16px rgba(108,99,255,.35)"}}>
+  <button onClick={()=>start(false)} style={{width:"100%",minHeight:58,padding:16,borderRadius:16,border:"none",background:"var(--accent)",color:"#fff",fontSize:17,fontWeight:800,cursor:"pointer",boxShadow:"0 6px 18px rgba(63,111,143,.22)"}}>
     スタート → ({Math.min(qc, cat==="all"?Q.length:Q.filter(x=>x.cat===cat).length)}問)
   </button>
 </div>
 
 {/* 全問ボタン */}
-<button onClick={()=>setCat("all")} style={{width:"100%",padding:"9px 12px",borderRadius:10,marginBottom:10,display:"flex",justifyContent:"space-between",alignItems:"center",border:cat==="all"?"2px solid var(--accent)":"1px solid var(--border)",background:cat==="all"?"rgba(108,99,255,.14)":"var(--card)",color:cat==="all"?"var(--accent)":"var(--text)",fontSize:13,fontWeight:700,cursor:"pointer"}}>
+<button onClick={()=>setCat("all")} style={{width:"100%",minHeight:54,padding:"14px 15px",borderRadius:16,marginBottom:14,display:"flex",justifyContent:"space-between",alignItems:"center",border:cat==="all"?"2px solid var(--accent)":"1px solid var(--border)",background:cat==="all"?"#eaf4f8":"var(--card)",color:cat==="all"?"var(--accent)":"var(--text)",fontSize:15,fontWeight:800,cursor:"pointer",boxShadow:"0 2px 10px rgba(39,49,66,.04)"}}>
   <span>📚 全セクション</span><span style={{fontSize:11,color:"var(--text2)"}}>{Q.length}問 / {allRate}</span>
 </button>
 
@@ -169,16 +169,16 @@ return(<div style={r}><div style={{maxWidth:480,margin:"0 auto",padding:"16px 14
   return(
     <div key={g.label} style={{marginBottom:8}}>
       <div style={{fontSize:10,fontWeight:700,color:"var(--text2)",marginBottom:4,paddingLeft:2}}>{g.label} <span style={{color:"var(--border)"}}>({gTotal}問)</span> <span style={{color:gRate==="未回答"?"var(--text2)":"var(--green)",marginLeft:4}}>{gRate}</span></div>
-      <div style={{display:"flex",flexWrap:"wrap",gap:4}}>
+      <div style={{display:"flex",flexWrap:"wrap",gap:8}}> 
         {gCats.map(id=>{
           const ci=CATS.find(c=>c.id===id);
           const n=Q.filter(q=>q.cat===id).length;
           const sel=cat===id;
           const wCount=Q.filter(q=>q.cat===id&&isWrong(q,wrongIds)).length;
           const cRate=rateText(categoryStats[id]);
-          return(<button key={id} onClick={()=>setCat(id)} style={{padding:"5px 8px",borderRadius:8,fontSize:11,fontWeight:600,cursor:"pointer",border:sel?"2px solid var(--accent)":"1px solid var(--border)",background:sel?"rgba(108,99,255,.14)":"var(--card)",color:sel?"var(--accent)":"var(--text2)",display:"flex",alignItems:"center",gap:4,position:"relative"}}>
+          return(<button key={id} onClick={()=>setCat(id)} style={{minHeight:46,padding:"10px 12px",borderRadius:14,fontSize:13,fontWeight:700,cursor:"pointer",border:sel?"2px solid var(--accent)":"1px solid var(--border)",background:sel?"#eaf4f8":"var(--card)",color:sel?"var(--accent)":"var(--text2)",display:"flex",alignItems:"center",gap:6,position:"relative",maxWidth:"100%"}}>
             <span>{ci?.icon}</span>
-            <span style={{maxWidth:90,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{ci?.label.replace(/\d+-\d+\s/,"")}</span>
+            <span style={{maxWidth:128,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{ci?.label.replace(/\d+-\d+\s/,"")}</span>
             <span style={{fontSize:9,color:sel?"var(--accent)":"var(--border)",marginLeft:2}}>{n}</span>
             {cRate!=="未回答"&&<span style={{fontSize:9,color:"var(--green)",marginLeft:2}}>{cRate}</span>}
             {wCount>0&&<span style={{fontSize:9,background:"#e74c3c",color:"#fff",borderRadius:20,padding:"0 4px",marginLeft:2}}>{wCount}</span>}
@@ -194,32 +194,32 @@ return(<div style={r}><div style={{maxWidth:480,margin:"0 auto",padding:"16px 14
 
 // ===== QUIZ =====
 if(mode==="quiz"){const c=cards[idx];const ci=CATS.find(x=>x.id===c.cat);const ok=sel===c.a;
-return(<div style={r}><div style={{maxWidth:480,margin:"0 auto",padding:"24px 16px"}}>
+return(<div style={r}><div style={{width:"100%",maxWidth:560,margin:"0 auto",padding:"18px 16px 28px",overflowX:"hidden"}}> 
 <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12}}>
-  <button onClick={()=>setMode("menu")} style={{background:"none",border:"none",color:"var(--text2)",fontSize:14,cursor:"pointer"}}>← 戻る</button>
+  <button onClick={()=>setMode("menu")} style={{background:"none",border:"none",color:"var(--text2)",fontSize:15,cursor:"pointer",padding:"10px 2px",minHeight:44}}>← 戻る</button>
   <div style={{display:"flex",gap:8,alignItems:"center"}}>
     {reviewMode&&<span style={{fontSize:10,background:"rgba(231,76,60,.2)",color:"#e74c3c",borderRadius:6,padding:"2px 6px",fontWeight:700}}>苦手問題</span>}
     <span style={{fontSize:13,color:"var(--green)",fontWeight:700}}>✓{score}</span>
-    <span style={{fontSize:13,color:"var(--text2)",fontWeight:600}}>{idx+1}/{cards.length}</span>
+    <span style={{fontSize:16,color:"var(--accent)",fontWeight:900,background:"#eaf4f8",border:"1px solid #d5e7ef",borderRadius:999,padding:"5px 12px"}}>{idx+1}/{cards.length}</span>
   </div>
 </div>
 <Prog c={idx+1} t={cards.length} color={reviewMode?"var(--red)":"var(--accent)"}/>
-<div style={{marginTop:16,padding:16,borderRadius:14,background:"var(--card)",border:"1px solid var(--border)"}}><div style={{display:"flex",justifyContent:"space-between",marginBottom:8}}><span style={{fontSize:10,color:"var(--accent)",fontWeight:700}}>{ci?.icon} {ci?.label}</span>{c.ref&&<span style={{fontSize:9,color:"var(--text2)"}}>{c.ref}</span>}</div><div style={{fontSize:14,fontWeight:500,lineHeight:1.9}}>{c.q}</div></div>
-{!ans?(<div style={{display:"flex",gap:12,marginTop:16}}><button onClick={()=>answer(true)} style={{flex:1,padding:"18px 0",borderRadius:14,border:"2px solid var(--green)",background:"rgba(46,204,113,.08)",color:"var(--green)",fontSize:28,fontWeight:800,cursor:"pointer"}}>○</button><button onClick={()=>answer(false)} style={{flex:1,padding:"18px 0",borderRadius:14,border:"2px solid var(--red)",background:"rgba(231,76,60,.08)",color:"var(--red)",fontSize:28,fontWeight:800,cursor:"pointer"}}>×</button></div>):(<div style={{marginTop:14}}>
-<div style={{padding:14,borderRadius:14,background:ok?"rgba(46,204,113,.1)":"rgba(231,76,60,.1)",border:`2px solid ${ok?"var(--green)":"var(--red)"}`,textAlign:"center",marginBottom:10}}>
+<div style={{marginTop:18,padding:18,borderRadius:18,background:"var(--card)",border:"1px solid var(--border)",boxShadow:"0 6px 22px rgba(39,49,66,.07)",overflowWrap:"anywhere"}}><div style={{display:"flex",justifyContent:"space-between",gap:10,alignItems:"center",marginBottom:12}}><span style={{fontSize:13,color:"var(--accent)",fontWeight:800}}>{ci?.icon} {ci?.label}</span>{c.ref&&<span style={{fontSize:11,color:"var(--text2)",whiteSpace:"nowrap"}}>{c.ref}</span>}</div><div style={{fontSize:17,fontWeight:600,lineHeight:2.05,letterSpacing:0}}>{c.q}</div></div>
+{!ans?(<div style={{display:"flex",gap:16,marginTop:20}}><button onClick={()=>answer(true)} style={{flex:1,minHeight:82,padding:"20px 0",borderRadius:20,border:"2px solid var(--green)",background:"#eef8f1",color:"var(--green)",fontSize:38,fontWeight:900,cursor:"pointer",boxShadow:"0 5px 14px rgba(79,154,102,.14)"}}>○</button><button onClick={()=>answer(false)} style={{flex:1,minHeight:82,padding:"20px 0",borderRadius:20,border:"2px solid var(--red)",background:"#fff0ee",color:"var(--red)",fontSize:38,fontWeight:900,cursor:"pointer",boxShadow:"0 5px 14px rgba(184,92,92,.13)"}}>×</button></div>):(<div style={{marginTop:14}}>
+<div className="answer-result" style={{padding:16,borderRadius:18,background:ok?"#eef8f1":"#fff0ee",border:`2px solid ${ok?"var(--green)":"var(--red)"}`,textAlign:"center",marginBottom:12,animation:"softPop .18s ease-out"}}>
   <div style={{fontSize:18,fontWeight:800,color:ok?"var(--green)":"var(--red)",marginBottom:2}}>{ok?"正解！🎉":"不正解…"}</div>
   <div style={{fontSize:14,fontWeight:700,color:"var(--text)"}}>正解は「{c.a?"○":"×"}」</div>
   {ok&&reviewMode&&<div style={{fontSize:11,color:"var(--green)",marginTop:4}}>✓ 間違いリストから削除されました</div>}
   {!ok&&<div style={{fontSize:11,color:"var(--red)",marginTop:4}}>🔴 間違いリストに追加されました</div>}
 </div>
-<button onClick={()=>setShowExp(!showExp)} style={{width:"100%",padding:9,borderRadius:9,border:"1px solid var(--border)",background:"var(--card2)",color:"var(--text2)",fontSize:12,cursor:"pointer",textAlign:"left",marginBottom:8}}>{showExp?"▼ 解説を閉じる":"▶ 解説を見る"}</button>
-{showExp&&<div style={{padding:12,borderRadius:9,fontSize:12,lineHeight:1.8,background:"rgba(108,99,255,.06)",border:"1px solid rgba(108,99,255,.15)",color:"var(--text)",marginBottom:10}}>{c.exp}</div>}
-<button onClick={next} style={{width:"100%",padding:13,borderRadius:12,border:"none",background:reviewMode?"var(--red)":"var(--accent)",color:"#fff",fontSize:15,fontWeight:700,cursor:"pointer"}}>{idx+1<cards.length?"次の問題 →":"結果を見る →"}</button>
+<button onClick={()=>setShowExp(!showExp)} style={{width:"100%",minHeight:50,padding:14,borderRadius:14,border:"1px solid var(--border)",background:"var(--card2)",color:"var(--text2)",fontSize:14,cursor:"pointer",textAlign:"left",marginBottom:10}}>{showExp?"▼ 解説を閉じる":"▶ 解説を見る"}</button>
+{showExp&&<div style={{padding:15,borderRadius:14,fontSize:14,lineHeight:1.9,background:"#eef5f7",border:"1px solid #d5e7ef",color:"var(--text)",marginBottom:12,overflowWrap:"anywhere"}}>{c.exp}</div>}
+<button onClick={next} style={{width:"100%",minHeight:58,padding:16,borderRadius:16,border:"none",background:reviewMode?"var(--red)":"var(--accent)",color:"#fff",fontSize:17,fontWeight:800,cursor:"pointer",boxShadow:"0 5px 16px rgba(63,111,143,.16)"}}>{idx+1<cards.length?"次の問題 →":"結果を見る →"}</button>
 </div>)}</div></div>);}
 
 // ===== RESULT =====
 if(mode==="result"){const t=hist.length;const cr=score;const p=Math.round((cr/t)*100);const em=p>=80?"🎉":p>=60?"👍":p>=40?"💪":"📖";const ms=p>=80?"素晴らしい！":p>=60?"いい調子！":p>=40?"もう少し！":"復習しよう！";
-return(<div style={r}><div style={{maxWidth:480,margin:"0 auto",padding:"28px 16px"}}>
+return(<div style={r}><div style={{width:"100%",maxWidth:560,margin:"0 auto",padding:"28px 16px 34px",overflowX:"hidden"}}> 
 <div style={{textAlign:"center",marginBottom:20}}><div style={{fontSize:44,marginBottom:6}}>{em}</div><h2 style={{fontSize:19,fontWeight:800,margin:"0 0 4px"}}>{ms}</h2>{reviewMode&&<div style={{fontSize:12,color:"var(--red)",fontWeight:700}}>苦手問題だけ出題</div>}</div>
 <div style={{padding:20,borderRadius:14,background:"var(--card)",border:"1px solid var(--border)",textAlign:"center",marginBottom:14}}>
   <div style={{fontSize:42,fontWeight:800,color:p>=60?"var(--green)":"var(--accent2)"}}>{p}%</div>
